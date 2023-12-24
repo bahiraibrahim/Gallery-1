@@ -1,0 +1,11 @@
+.sticky-top{
+    background-color: #022a31;
+}
+.logo{
+    width: 50px;
+    height: 50px;
+    border-top-right-radius: 170em;
+    border-bottom-right-radius: 170em;
+    border-top-left-radius: 170em;
+    border-bottom-left-radius: 170em;
+}
