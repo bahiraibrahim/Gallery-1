@@ -9,7 +9,8 @@ const Footer = () => {
         <div className="footer-background footer mt-3 pt-2" style={{ maxHeight: "50px" }}>
             <Container className="">
                 <Row className="d-flex justify-content-between align-items-center">
-                    <Col sm="6" className="d-flex align-items-center ">
+                <hr className="hr"/>
+                <Col sm="6" className="d-flex align-items-center ">
                         <div className="footer-shroot ">الشروط والاحكام</div>
                         <div className="footer-shroot mx-2">سيايه الخصوصيه</div>
                         <div className="footer-shroot mx-2">اتصل بنا</div>

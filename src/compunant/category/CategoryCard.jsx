@@ -1,78 +1,121 @@
-import { Card, Col } from "react-bootstrap";
-import favoff from "../../assets/bx-heart.svg";
-import rate from "../../assets/bxs-star.svg";
-import { style } from "./CategoryStyle";
+/* eslint-disable react/prop-types */
+import { Card, Container } from "react-bootstrap";
+import { useShoppingCart } from "../context/ShoppingCartContext";
+import FormatCurrency from "../../pages/cart/FormatCurrency";
+import cart from "../../assets/cart-down.png";
+import heart from "../../assets/heart.png";
+import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
-const CategoryCard = ({ img, title, text }) => {
+
+const CategoryCard = ({ id, title, Price, image,details }) => {
+  const [click, setClick] = useState("#022a31");
+  console.log(id);
+  const myfun = () => {
+    if (click === "#022a31") {
+      setClick("red");
+    } else {
+      setClick("#022a31");
+    }
+  };
+
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+
+  const quantity = getItemQuantity(id);
+
+  const [showDetails, setShowDetails] = useState(false);
+  const handleImageClick = () => {
+    setShowDetails(!showDetails);
+  };
   return (
-    <Col xs="6" sm="6" md="4" lg="2" className="my-4  ">
-      <Card className="my-2" style={style}>
-        <div className="allCard mb-3">
-          <img
-            alt="zcv"
-            src={img}
-            className="category-card-img"
-            style={{
-              width: "100%",
-              margin: "auto",
-            }}
-          />
-          <Card.Body>
-            <p className="category-text my-2">{text}</p>
-
-            <div className="d-flex justify-content-end mx-2">
-              <img
-                src={favoff}
-                alt=""
-                className="icon"
-                style={{
-                  height: "24px",
-                  width: "26px",
-                  marginLeft: "-50px",
-                }}
-              />
+    <Container>
+      <Card
+        id="card"
+        className="card-category"
+        sm="6"
+        xs="8"
+        md="4"
+        lg="5"
+        style={{ width: "100%" }}
+      >
+        <Card.Img
+          variant="top"
+          src={image}
+          alt={Price}
+          style={{ height: "200px", objectFit: "cover" }}
+          className="img-card"
+          onClick={handleImageClick}
+        />
+        {showDetails && (
+          <div>
+            <h5>{details} </h5>
+            <p>{Price}</p>
+          </div>
+        )}
+        <Card.Body className="d-flex flex-column">
+          <Card.Title className=" mb-4">
+            <span className="title ">{title}</span>
+            <div>
+              <span className="ms-2 text-muted mb-3 mt-2">
+                {FormatCurrency(Price)}
+              </span>
             </div>
-            <Card.Text>
-              <div className="d-flex justify-content-between ">
-                <div className="d-flex">
-                  <img
-                    className="rate"
-                    src={rate}
-                    style={{
-                      height: "16px",
-                      width: "16px",
-                      marginTop: "20px",
-                    }}
-                  />
-                  <div
-                    className="card-rate mx-2"
-                    style={{
-                      marginTop: "20px",
-                    }}
+          </Card.Title>
+          <div className="mt-auto d-flex justify-content-between">
+            <button
+              className="w-25 h-50"
+              onClick={myfun}
+              style={{ backgroundColor: click }}
+            >
+              <img className="cart_1" src={heart} />
+            </button>
+            {quantity === 0 ? (
+              <button
+                className="button-cart-item"
+                onClick={() => increaseCartQuantity(id)}
+              >
+                <img className="cart_1" src={cart} />
+              </button>
+            ) : (
+              <div
+                className="d-flex align-items-center flex-column"
+                style={{ gap: "0.5rem", marginTop: "-35px" }}
+              >
+                <div
+                  className="d-flex align-items-center justify-content-center"
+                  style={{ gap: "0.5rem" }}
+                >
+                  <button
+                    className="button-cart-item"
+                    onClick={() => decreaseCartQuantity(id)}
                   >
-                    4.5
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <div className="card-price" style={{ marginTop: "20px" }}>
-                    {title}
-                  </div>
-                  <div
-                    className="card-currency mx-1"
-                    style={{
-                      marginTop: "20px",
-                    }}
+                    -
+                  </button>
+                  <span className="fs-5 title">{quantity} in cart</span>
+                  <button
+                    className="button-cart-item"
+                    onClick={() => increaseCartQuantity(id)}
                   >
-                    جنيه
-                  </div>
+                    +
+                  </button>
                 </div>
+                <button
+                  size="sm"
+                  onClick={() => removeFromCart(id)}
+                  className="button-cart"
+                >
+                  Remove
+                </button>
               </div>
-            </Card.Text>
-          </Card.Body>
-        </div>
+            )}
+          </div>
+        </Card.Body>
       </Card>
-    </Col>
+    </Container>
   );
 };
 

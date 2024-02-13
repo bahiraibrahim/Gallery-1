@@ -1,22 +1,20 @@
 import { Col, Container, Row } from "react-bootstrap"
-import SearchCountResult from "../../compunant/Utility/SearchCountResult"
-import CategoryHeader from "../../compunant/category/CategoryHeader"
-import SideFilter from "../../compunant/Utility/SideFilter"
-import Pagination from "../../compunant/Utility/Pagination"
-import CategoryContainer from "../../compunant/category/CategoryContainer"
+import Pagination from "../../compunant/Utility/Pagination/Pagination"
+import CategoryContainer1 from "../../compunant/category/CategoryContainerChains"
+import CategoryHeaderChains from "../../json/Filter/Slip/CategoryHeaderSlip"
+import SearchCountResultChains from "../../json/Filter/Slip/SearchCountResult"
 
-const ShopProducts = () => {
+const ShopProducts_2 = () => {
   return (
     <div style={{minHeight:'670px'}}>
-    <CategoryHeader/>
+    <CategoryHeaderChains/>
     <Container>
-    <SearchCountResult title='400 نتيجة بحث ...'/>
+    <SearchCountResultChains title='400 نتيجة بحث ...'/>
     <Row className="d-flex flex-row">
     <Col sm='2' xs='2' md='1' className="d-flex">
-    <SideFilter/>
     </Col>
-    <Col sm='10' xs='10' md='11'>
-    <CategoryContainer title='' btntitle=""/>
+    <Col sm='10' xs='10' md='12'>
+    <CategoryContainer1 title="" btntitle=""/>
     </Col>
     </Row>
     <Pagination/>
@@ -25,4 +23,4 @@ const ShopProducts = () => {
   )
 }
 
-export default ShopProducts
+export default ShopProducts_2

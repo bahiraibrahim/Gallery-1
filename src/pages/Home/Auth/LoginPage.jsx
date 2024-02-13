@@ -1,40 +1,72 @@
-import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Alert } from "react-bootstrap";
+import Home from "../Home.jsx";
 
-const LoginPage = () => {
+function Login() {
+  const [emaillog, setEmaillog] = useState(" ");
+  const [passwordlog, setPasswordlog] = useState(" ");
+  const [accept, setAccept] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const [home, setHome] = useState(true);
+
+  function handleLogin(e) {
+    e.preventDefault();
+    setAccept(true);
+    let pass = localStorage.getItem("Password").replace(/"/g, "");
+    let mail = localStorage.getItem("Email").replace(/"/g, "");
+
+    if (!emaillog || !passwordlog) {
+      setFlag(true);
+    } else if (passwordlog !== pass || emaillog !== mail) {
+      setFlag(true);
+    } else {
+      setHome(!home);
+      setFlag(false);
+    }
+  }
+
   return (
-      <Container style={{ minHeight: "690px" }}>
-          <Row className="py-5 d-flex justify-content-center ">
-              <Col sm="12" className="d-flex flex-column ">
-                  <label className="mx-auto title-login">تسجيل الدخول</label>
-                  <input
-                      placeholder="الايميل..."
-                      type="email"
-                      className="user-input my-3 text-center mx-auto"
-                  />
-                  <input
-                      placeholder="كلمه السر..."
-                      type="password"
-                      className="user-input text-center mx-auto"
-                  />
-                  <button className="btn-login mx-auto mt-4">تسجيل الدخول</button>
-                  <label className="mx-auto my-4">
-                      ليس لديك حساب ؟{" "}
-                      <Link to="/register" style={{ textDecoration: 'none' }}>
-                          <span style={{ cursor: "pointer" }} className="text-danger">
-                              اضغط هنا
-                          </span>
-                      </Link>
-                  </label>
-                  <label className="mx-auto my-4">
-                      <Link to="/user/forget-password" style={{ textDecoration: 'none', color: 'red' }}>
-                          هل نسيت كلمه السر
-                      </Link>
-                  </label>
-              </Col>
-          </Row>
-      </Container>
-  )
+    <div>
+      <div className="page">
+        {home ? (
+          <form onSubmit={handleLogin}>
+            <h3> الدخول</h3>
+
+            <input
+              type="email"
+              className="input mt-3 mb-3"
+              placeholder="ايميل... "
+              onChange={(event) => setEmaillog(event.target.value)}
+              required
+            />
+
+            <input
+              type="password"
+              className="input mt-3 mb-3"
+              placeholder="كلمة السر..."
+              onChange={(event) => setPasswordlog(event.target.value)}
+              required
+            />
+            {passwordlog.length < 8 && accept && (
+              <p className="error">Password must be more than 8 char</p>
+            )}
+
+            <button type="submit" className="create mt-3 mb-5 me-2">
+              تسجيل دخول
+            </button>
+
+            {flag && (
+              <Alert color="primary" variant="warning">
+                Fill correct Info else keep trying.
+              </Alert>
+            )}
+          </form>
+        ) : (
+          <Home />
+        )}
+      </div>
+    </div>
+  );
 }
 
-export default LoginPage
+export default Login;

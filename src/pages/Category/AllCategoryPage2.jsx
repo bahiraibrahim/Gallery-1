@@ -1,16 +1,13 @@
-import CategoryContainer from "../../compunant/category/CategoryContainer"
-import Pagination from "../../compunant/Utility/Pagination"
+import Pagination from "../../compunant/Utility/Pagination/Pagination";
+import CategoryContainer_2 from "../../compunant/category/CategoryContainer_2";
 
-const AllCategoryPage = () => {
+const AllCategoryPage_2 = () => {
+  return (
+    <div style={{ minHeight: "670px" }}>
+      <CategoryContainer_2 />
+      <Pagination />
+    </div>
+  );
+};
 
-    return (
-        <div style={{ minHeight: '670px' }}>
-        
-        <CategoryContainer/>
-        <Pagination/>
-        </div>
-
-    )
-}
-
-export default AllCategoryPage
+export default AllCategoryPage_2;
