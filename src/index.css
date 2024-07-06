@@ -4,43 +4,14 @@
   --every-color:#252323;
 }
 
-.react-switch{
-  margin-top: 50px;
-}
-
-#dark button.shopping{
-  color: #fff;
-  box-shadow: 0 0px 6px 2px rgb(255, 254, 254)
+.light {
+  --main: #efefef;
+  --dark-color:#fff;
+  --every-color:#252323;
 }
 
 .dropdown{
   background-color: #022a31;
-}
-
-#light{
-  background-color: #ffffff;
-}
-#dark{
-  background-color: var(--dark-color);
-}
-
-.switch{
-  display: flex;
-  width: 20%;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 9999;
-  top: 27px;
-  margin-right: 10rem;
-}
-
-#light .switch label{
-  color: #fff;
-}
-
-#dark .switch label{
-  color: #fff;
 }
 
 .page-link{
