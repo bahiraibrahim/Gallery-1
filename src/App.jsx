@@ -28,26 +28,15 @@ import ShopFilterAllSlip from "./json/Filter/Chains/All/ShopFilterAllEarring.jsx
 import ShopFilterSlipAx from "./json/Filter/Chains/AX/ShopFilterSlipAx.jsx";
 import ShopDUpSlip from "./json/Filter/Chains/Down-Up/ShopDUpSlip.jsx";
 import ShopUpDSlip from "./json/Filter/Chains/Up-Down/ShopUpDEarring.jsx";
-import { createContext, useState } from "react";
-import ReactSwitch from "react-switch";
+import { createContext } from "react";
 
 
 
 export const ThemContext= createContext(null);
 function App() {
 
-const [theme,setTheme] =useState("light")
-
-const toggleTheme=()=>{
-  setTheme((curr)=>(curr==="light"?"dark":"light"));
-};
   return (
-    <ThemContext.Provider value={{theme,toggleTheme}}>
-    <div className="font" id={theme}>
-    <div className="switch">
-    <label>{theme==="light"?"Light Mode":"Dark Mode"}</label>
-    <ReactSwitch onChange={toggleTheme} checked={theme==="dark"}/>
-    </div>
+    <div className="font" >
       <ShoppingCartProvider>
         <Navbarlogin />
         <BrowserRouter>
@@ -78,13 +67,11 @@ const toggleTheme=()=>{
             <Route path="/Slip-ax" element={<ShopFilterSlipAx/>} />
             <Route path="/dow-to-up" element={<ShopDUpSlip/>} />
             <Route path="/up-to-dow" element={<ShopUpDSlip/>} />
-
           </Routes>
         </BrowserRouter>
       </ShoppingCartProvider>
       <Footer />
     </div>
-    </ThemContext.Provider>
   );
 }
 
