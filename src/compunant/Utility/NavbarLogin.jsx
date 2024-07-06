@@ -18,7 +18,6 @@ function Navbarlogin() {
         <Navbar.Brand href="/">
           <img src={logo} className="img" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto gap-5">
             <Nav.Link>
